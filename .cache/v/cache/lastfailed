@@ -1,9 +1,6 @@
 {
   "test_parser.py::TestParser::test_action_list": true,
-  "test_parser.py::TestParser::test_chunk": true,
-  "test_parser.py::TestParser::test_get_group": true,
-  "test_parser.py::TestParser::test_get_guid": true,
   "test_parser.py::TestParser::test_get_list_from_action_string": true,
-  "test_parser.py::TestParser::test_raw_data": true,
-  "test_parser.py::TestParser::test_split_action_string": true
+  "test_parser.py::TestParser::test_split_action_string": true,
+  "test_parser.py::TestParser::test_split_full_string": true
 }

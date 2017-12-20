@@ -1,10 +1,32 @@
-"""
-This module is for parsing strings created by TactileTTS.
-Data is in data/TactileTTS_Phase_2.csv
-"""
+# Get the full string
+# split into action_string, guid, group
+# Turn into dict
 
 import csv
 import sys
+import re
+
+def from_csv(file):
+    data = []
+    with open(file, 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            data.append(row)
+    return data
+
+def get_guid(full_string):
+    return full_string.split(',')[-2]
+
+def get_group(full_string):
+    return int(full_string.split(',')[-1])
+
+def get_action_string(full_string):
+    regex = '\[(.+)\]'
+    result = re.search(regex, full_string).group(0)
+
+    for ch in ['[', ']']:
+        result = result.replace(ch, '')
+    return result
 
 def chunk(list, interval):
     chunked_list = []
@@ -16,54 +38,26 @@ def chunk(list, interval):
             raise ValueError("Not enough values to complete a chunk!")
     return chunked_list
 
-def key_actions(actions):
-    keyed_actions = []
-
-    if not actions[0]:
-        return []
-
-    for item in chunk(actions, 3):
-        keyed_actions.append({
-            'action': item[0],
-            'location': item[1],
-            'time': item[2]
-        })
-    return keyed_actions
-
-def split_action_string(action_string):
+def get_actions(action_string):
     actions = action_string.split(',')
-    for ch in ['[', ']', "'", '"', ' ']:
-        actions = [x.replace(ch, '') for x in actions]
-    return actions
-
-def get_list_from_action_string(action_string):
-    actions = split_action_string(action_string)
+    for i in range(len(actions)):
+        for ch in ['"', "'", ' ']:
+            actions[i] = actions[i].replace(ch, '')
     return chunk(actions, 3)
 
-def get_guid(action_string):
-    actions = split_action_string(action_string)
-    return actions[-2]
+def actions_to_dict(actions):
+    mapped_actions = []
+    for action in actions:
+        mapped_actions.append({
+            'action': action[0],
+            'location': int(action[1]),
+            'time': float(action[2])
+        })
+    return mapped_actions
 
-def get_group(action_string):
-    actions = split_action_string(action_string)
-    return int(actions[-1])
-
-def action_list(action_string):
-    actions = get_list_from_action_string(action_string)
-    keyed_actions = key_actions(actions)
-    return keyed_actions
-
-def from_csv(file):
-    data = []
-    with open(file, 'r') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            data.append(row)
-    return data
-
-def list_to_dict(data):
-    sorted_data = {}
-    for item in data:
-        guid = get_guid()
-        sys.exit(1)
-    return sorted_data
+def to_dict(guid, group, actions):
+    return {
+        'guid': guid,
+        'group': group,
+        'actions': actions_to_dict(actions)
+    }
