@@ -1,0 +1,21 @@
+{
+  "tasks": [
+    {
+      "taskName": "test",
+      "command": "pytest",
+      "args": [
+        "test_parser.py"
+      ],
+      "isTestCommand": true
+    },
+    {
+      "taskName": "test verbose",
+      "command": "pytest",
+      "args": [
+        "-s",
+        "test_parser.py"
+      ],
+      "isTestCommand": true
+    }
+  ]
+}
