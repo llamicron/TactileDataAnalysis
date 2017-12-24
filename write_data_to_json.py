@@ -29,3 +29,6 @@ for line in lines:
             'results': results
         })
 
+
+with open('data/NavDatav2.json', 'w') as f:
+    f.write(json.dumps(data))
