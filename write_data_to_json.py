@@ -1,5 +1,5 @@
 """
-Run this script with '-w' to write to data/NavDatav2.json
+Run this script with '-w' to write to data/NavData.json
 Otherwise it will exit doing with the parsed data
 """
 
@@ -18,7 +18,7 @@ def chunk(list, interval):
     return chunked_list
 
 
-lines = open('data/NavDatav2.dat', 'r').read().split('\n')
+lines = open('data/NavData.dat', 'r').read().split('\n')
 data = []
 
 for line in lines:
@@ -43,5 +43,5 @@ for line in lines:
 
 if '-w' in sys.argv:
     print("Writing to file")
-    with open('data/NavDatav2.json', 'w') as f:
+    with open('data/NavData.json', 'w') as f:
         f.write(json.dumps(data))
