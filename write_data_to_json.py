@@ -38,7 +38,7 @@ for line in lines:
             }
         data.append({
             'guid': guid,
-            'results': results
+            'actions': results
         })
 
 if '-w' in sys.argv:

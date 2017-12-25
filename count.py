@@ -10,7 +10,7 @@ for record in data:
         'BG': 0,
         'FG': 0,
     }
-    for action in record['results']:
+    for action in record['actions']:
         if 'BG' in action['action']:
             count['BG'] += 1
 
@@ -19,7 +19,7 @@ for record in data:
 
         if int(action['location']) == 0:
             count['training_actions'] += 1
-    count['actions'] = len(record['results']) - (count['BG'] + count['FG'])
+    count['actions'] = len(record['actions']) - (count['BG'] + count['FG'])
     record['count'] = count
 
 

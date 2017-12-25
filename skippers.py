@@ -14,9 +14,9 @@ for x in range(len(data)):
     record = data[x]
     skipper = False
     # Order by time
-    record['results'] = sorted(record['results'], key=lambda k: k['time'])
+    record['actions'] = sorted(record['actions'], key=lambda k: k['time'])
     # Find string of F or FP
-    forwards = [x for x in record['results'] if x['action'] == "FP" or x['action'] == "F"]
+    forwards = [x for x in record['actions'] if x['action'] == "FP" or x['action'] == "F"]
     if not forwards:
         skipper = False
         # continue
