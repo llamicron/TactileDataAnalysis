@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+TestCLI	../test_cli.py	/^class TestCLI(unittest.TestCase):$/;"	kind:class	line:9
+TestSkippers	../test_skippers.py	/^class TestSkippers(unittest.TestCase):$/;"	kind:class	line:12
+chunk	../write_data_to_json.py	/^def chunk(list, interval):$/;"	kind:function	line:10
+cli.py	../cli.py	1;"	kind:file	line:1
+count	../count.py	/^    count = {$/;"	kind:variable	line:7
+count.py	../count.py	1;"	kind:file	line:1
+data	../count.py	/^data = json.load(open('data\/NavData.json', 'r'))$/;"	kind:variable	line:4
+data	../skippers.py	/^    data = indentify_skippers(data, time_interval, skip_amount)$/;"	kind:variable	line:35
+data	../skippers.py	/^    data = indentify_skippers(data, time_interval, skip_amount)$/;"	kind:variable	line:40
+data	../skippers.py	/^data = json.load(open('data\/CountedNavData.json', 'r'))$/;"	kind:variable	line:8
+data	../test_skippers.py	/^data = json.load(open('data\/CountedNavData.json', 'r'))$/;"	kind:variable	line:10
+data	../write_data_to_json.py	/^data = []$/;"	kind:variable	line:22
+doc	../test_cli.py	/^from cli import __doc__ as doc$/;"	kind:namespace	line:5
+docopt	../cli.py	/^from docopt import docopt$/;"	kind:namespace	line:6
+docopt	../test_cli.py	/^from docopt import docopt$/;"	kind:namespace	line:4
+entry	../cli.py	/^def entry(args):$/;"	kind:function	line:8
+guid	../write_data_to_json.py	/^        guid = match.group(1)$/;"	kind:variable	line:27
+indentify_skippers	../skippers.py	/^def indentify_skippers(data, time_interval, skip_amount):$/;"	kind:function	line:10
+indentify_skippers	../test_skippers.py	/^from skippers import indentify_skippers, time_interval, skip_amount$/;"	kind:namespace	line:8
+json	../count.py	/^import json$/;"	kind:namespace	line:1
+json	../skippers.py	/^import json$/;"	kind:namespace	line:1
+json	../test_skippers.py	/^import json$/;"	kind:namespace	line:6
+json	../write_data_to_json.py	/^import json$/;"	kind:namespace	line:8
+lines	../write_data_to_json.py	/^lines = open('data\/NavData.dat', 'r').read().split('\\n')$/;"	kind:variable	line:21
+match	../write_data_to_json.py	/^    match = re.match(r'(.+)(.+\\[.+\\])', line)$/;"	kind:variable	line:25
+pytest	../test_cli.py	/^import pytest$/;"	kind:namespace	line:2
+re	../write_data_to_json.py	/^import re$/;"	kind:namespace	line:6
+result_string	../write_data_to_json.py	/^            result_string = result_string.replace(ch, '')$/;"	kind:variable	line:30
+result_string	../write_data_to_json.py	/^        result_string = match.group(2)$/;"	kind:variable	line:28
+results	../write_data_to_json.py	/^        results = chunk(results, 3)$/;"	kind:variable	line:32
+results	../write_data_to_json.py	/^        results = result_string.split(',')$/;"	kind:variable	line:31
+setUp	../test_skippers.py	/^    def setUp(self):$/;"	kind:member	line:14
+skip_amount	../skippers.py	/^skip_amount = 10$/;"	kind:variable	line:6
+skip_amount	../test_skippers.py	/^from skippers import indentify_skippers, time_interval, skip_amount$/;"	kind:namespace	line:8
+skippers.py	../skippers.py	1;"	kind:file	line:1
+sys	../count.py	/^import sys$/;"	kind:namespace	line:2
+sys	../skippers.py	/^import sys$/;"	kind:namespace	line:2
+sys	../write_data_to_json.py	/^import sys$/;"	kind:namespace	line:7
+test_cli.py	../test_cli.py	1;"	kind:file	line:1
+test_interval_10_skip_amount_10	../test_skippers.py	/^    def test_interval_10_skip_amount_10(self):$/;"	kind:member	line:49
+test_interval_5_skip_amount_5	../test_skippers.py	/^    def test_interval_5_skip_amount_5(self):$/;"	kind:member	line:17
+test_skippers.py	../test_skippers.py	1;"	kind:file	line:1
+time_interval	../skippers.py	/^time_interval = 10$/;"	kind:variable	line:5
+time_interval	../test_skippers.py	/^from skippers import indentify_skippers, time_interval, skip_amount$/;"	kind:namespace	line:8
+unittest	../test_cli.py	/^import unittest$/;"	kind:namespace	line:1
+unittest	../test_skippers.py	/^import unittest$/;"	kind:namespace	line:5
+write_data_to_json.py	../write_data_to_json.py	1;"	kind:file	line:1

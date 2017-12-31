@@ -26,4 +26,4 @@ for record in data:
 if '-w' in sys.argv:
     print("Writing to file: data/CountedNavData.json")
     with open('data/CountedNavData.json', 'w') as f:
-        f.write(json.dumps(data, indent=2))
+        f.write(json.dumps(data))
