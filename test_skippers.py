@@ -9,14 +9,14 @@ try:
 except ImportError:
     from unittest import main
 
-from skippers import indentify_skippers, time_interval, skip_amount
+from skippers import identify_skippers, time_interval, skip_amount
 
 data = json.load(open('data/CountedNavData.json', 'r'))
 
 class TestSkippers(unittest.TestCase):
 
     def test_interval_5_skip_amount_5(self):
-        data = indentify_skippers(5, 5)
+        data = identify_skippers(5, 5)
         skipper_guids = [
             "BE4CA75D-6FDD-44AC-B10D-EDD36CF404F8",
             "89D589AC-D35B-4524-8707-15194794827C",
@@ -48,7 +48,7 @@ class TestSkippers(unittest.TestCase):
                 assert not record['skipper']
 
     def test_interval_10_skip_amount_10(self):
-        data = indentify_skippers(10, 10)
+        data = identify_skippers(10, 10)
         skipper_guids = [
             "BE4CA75D-6FDD-44AC-B10D-EDD36CF404F8",
             "89D589AC-D35B-4524-8707-15194794827C",

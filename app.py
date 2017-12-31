@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from skippers import identify_skippers
 
 class CustomFlask(Flask):
     jinja_options = Flask.jinja_options.copy()
@@ -19,7 +20,10 @@ def index():
 
 @app.route('/refresh-data-set', methods=['POST'])
 def refresh_data():
-    pass
+    time = request.get_json()['time']
+    skip = request.get_json()['skip']
+    skippers = identify_skippers(int(time), int(skip))
+    return jsonify(skippers)
 
 if __name__ == '__main__':
     app.run()

@@ -6,7 +6,7 @@ time_interval = 10
 skip_amount = 10
 
 
-def indentify_skippers(time_interval, skip_amount, write_to_file=False):
+def identify_skippers(time_interval, skip_amount, write_to_file=False):
     skipper_count = 0
     data = json.load(open('data/CountedNavData.json', 'r'))
     skippers = []
@@ -35,9 +35,9 @@ def indentify_skippers(time_interval, skip_amount, write_to_file=False):
 
 if '-w' in sys.argv:
     print("Writing file")
-    data = indentify_skippers(time_interval, skip_amount)
+    data = identify_skippers(time_interval, skip_amount)
 
 
 if '-p' in sys.argv:
-    data = indentify_skippers(time_interval, skip_amount)
+    data = identify_skippers(time_interval, skip_amount)
     print(data)

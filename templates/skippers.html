@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Skippers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="(( url_for('static', filename='main.css') ))" />
+  <link rel="stylesheet" type="text/css" media="screen" href="(( url_for('static', filename='bulma.css') ))" />
+</head>
+
+<body>
+  <div id="main">
+    <div class="columns">
+      <div class="column is-3">
+        <label for="time">Time</label>
+        <input type="tel" name="time" id="time" v-model="time">
+        <label for="skip">Skip</label>
+        <input type="tel" name="skip" id="skip" v-model="skip">
+
+      </div>
+      <div class="column is-3">
+        <ul>
+          <li v-for="guid in shortGuids">
+            <code>
+              {{ guid }}
+            </code>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="(( url_for('static', filename='axios.min.js') ))"></script>
+  <script src="(( url_for('static', filename='vue.js') ))"></script>
+  <script src="(( url_for('static', filename='main.js') ))"></script>
+</body>
+
+</html>

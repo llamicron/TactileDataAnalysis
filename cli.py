@@ -22,7 +22,7 @@ VERSION = 'v0.0.1'
 import json
 
 from docopt import docopt
-from skippers import indentify_skippers
+from skippers import identify_skippers
 from coolered import color
 
 import sys
@@ -38,18 +38,14 @@ def entry(args):
     if args['skippers']:
         time = int(args['<time_interval>'])
         skip = int(args['<skip_amount>'])
-        if not 0 < time <= 60:
-            raise ValueError("time_interval should be between 1 and 60")
-        if not 0 < skip <= 60:
-            raise ValueError("skip_amount should be between 1 and 60")
 
-        skippers = indentify_skippers(time, skip)
+        skippers = identify_skippers(time, skip)
 
         if args['<format>'] == 'json':
             print(json.dumps(skippers))
         elif args['<format>'] == 'html':
-            # indentify_skippers(time, skip, write_to_file='static/skippers_for_web.json')
-            from web.app import app
+            # identify_skippers(time, skip, write_to_file='static/skippers_for_web.json')
+            from app import app
             color('green', "Web server running: visit http://localhost:5000/")
             app.run()
 

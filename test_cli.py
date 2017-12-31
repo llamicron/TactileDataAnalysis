@@ -1,7 +1,7 @@
 import pytest
 
 from docopt import docopt
-from skippers import indentify_skippers
+from skippers import identify_skippers
 from cli import __doc__ as doc
 from cli import entry
 
@@ -10,7 +10,7 @@ class TestCli:
         args = docopt(doc, ['skippers', '5', '5'])
         cli_skippers = entry(args)
 
-        skippers = indentify_skippers(5, 5)
+        skippers = identify_skippers(5, 5)
         assert cli_skippers == skippers
 
     def test_bad_values(self):
