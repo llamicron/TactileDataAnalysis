@@ -19,11 +19,14 @@ Options:
 
 VERSION = 'v0.0.1'
 
-import sys
+import json
 
 from docopt import docopt
 from skippers import indentify_skippers
 from coolered import color
+
+import sys
+import os
 
 def entry(args):
     if args['--version']:
@@ -43,20 +46,18 @@ def entry(args):
         skippers = indentify_skippers(time, skip)
 
         if args['<format>'] == 'json':
-            print('json')
-            # Do some json shit
-            pass
+            print(json.dumps(skippers))
         elif args['<format>'] == 'html':
-            print('html')
-            # Start the web server
+            # indentify_skippers(time, skip, write_to_file='static/skippers_for_web.json')
+            import web
+            color('green', "Web server running: visit http://localhost:5000/")
+            web.app.run()
+
         else:
             for skipper in skippers:
                 print(skipper['guid'])
-            print(len(skippers), "skippers")
-
-        sys.exit(1)
-
-
+        print(len(skippers), "skippers")
+        return skippers
 
 if __name__ == '__main__':
     entry(docopt(__doc__))

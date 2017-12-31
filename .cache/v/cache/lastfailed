@@ -1,7 +1,5 @@
 {
   "test_cli.py::TestCLI::test_it_gets_skippers": true,
-  "test_cli.py::TestCli::()::test_bad_values": true,
-  "test_cli.py::TestCli::()::test_basic_skippers": true,
   "test_cli.py::TestCli::test_tests": true,
   "test_parser.py::TestParser::test_action_list": true,
   "test_parser.py::TestParser::test_get_list_from_action_string": true,
