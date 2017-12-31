@@ -49,9 +49,9 @@ def entry(args):
             print(json.dumps(skippers))
         elif args['<format>'] == 'html':
             # indentify_skippers(time, skip, write_to_file='static/skippers_for_web.json')
-            import web
+            from web.app import app
             color('green', "Web server running: visit http://localhost:5000/")
-            web.app.run()
+            app.run()
 
         else:
             for skipper in skippers:

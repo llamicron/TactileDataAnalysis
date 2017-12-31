@@ -17,5 +17,9 @@ app = CustomFlask(__name__)
 def index():
     return render_template('skippers.html')
 
+@app.route('/refresh-data-set', methods=['POST'])
+def refresh_data():
+    pass
+
 if __name__ == '__main__':
     app.run()
