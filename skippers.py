@@ -25,17 +25,16 @@ def identify_skippers(time_interval, skip_amount, write_to_file=False):
         for i in range(len(forwards) - skip_amount):
             if float(forwards[i + skip_amount]['time']) - float(forwards[i]['time']) <= time_interval:
                 skipper = True
-        if skipper:
-            record['skipper'] = skipper
-            skippers.append(record)
+        record['skipper'] = skipper
+        skippers.append(record)
     if write_to_file:
-        with open(write_to_file, 'w') as f:
+        with open('data/Skippers.json', 'w') as f:
+            print("Writing file")
             f.write(json.dumps(skippers))
     return skippers
 
 if '-w' in sys.argv:
-    print("Writing file")
-    data = identify_skippers(time_interval, skip_amount)
+    data = identify_skippers(time_interval, skip_amount, write_to_file=True)
 
 
 if '-p' in sys.argv:
