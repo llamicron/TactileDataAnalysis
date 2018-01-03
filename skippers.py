@@ -25,6 +25,7 @@ def identify_skippers(time_interval, skip_amount, write_to_file=False):
         for i in range(len(forwards) - skip_amount):
             if float(forwards[i + skip_amount]['time']) - float(forwards[i]['time']) <= time_interval:
                 skipper = True
+
         record['skipper'] = skipper
         skippers.append(record)
     if write_to_file:
@@ -34,9 +35,8 @@ def identify_skippers(time_interval, skip_amount, write_to_file=False):
     return skippers
 
 if '-w' in sys.argv:
-    data = identify_skippers(time_interval, skip_amount, write_to_file=True)
+    identify_skippers(time_interval, skip_amount, write_to_file=True)
 
 
 if '-p' in sys.argv:
-    data = identify_skippers(time_interval, skip_amount)
-    print(data)
+    print(identify_skippers(time_interval, skip_amount))
