@@ -13,7 +13,7 @@ def export():
             'Skipper': record['skipper']
         }
         rows.append(new_format)
-    with open('data/NavData.csv', 'a') as f:
+    with open('data/NavData.csv', 'w') as f:
         w = csv.writer(f)
         w.writerow(rows[0].keys())
         for row in rows:
