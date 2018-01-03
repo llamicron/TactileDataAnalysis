@@ -24,7 +24,7 @@ data = []
 for line in lines:
     match = re.match(r'(.+)(.+\[.+\])', line)
     if match:
-        guid = match.group(1)
+        guid = match.group(1).replace('\t', '')
         result_string = match.group(2)
         for ch in ['"', "'", '[', ']', '\t']:
             result_string = result_string.replace(ch, '')
