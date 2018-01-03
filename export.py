@@ -10,8 +10,9 @@ def export():
             'NavTotal': record['count']['actions'],
             'TrainTotal': record['count']['training_actions'],
             'BGFGTotal': (record['count']['BG'] + record['count']['FG']) / 2,
-            'Skipper': record['skipper']
+            'Skipper': int(record['skipper'])
         }
+
         rows.append(new_format)
     with open('data/NavData.csv', 'w') as f:
         w = csv.writer(f)
