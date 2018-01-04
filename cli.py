@@ -22,7 +22,7 @@ VERSION = 'v0.0.1'
 import json
 
 from docopt import docopt
-from skippers import identify_skippers
+from improved_skippers import identify_skippers, write_skippers
 from coolered import color
 
 import sys
@@ -40,6 +40,9 @@ def entry(args):
         skip = int(args['<skip_amount>'])
 
         skippers = identify_skippers(time, skip)
+
+        if args['<format>'] == 'write':
+            write_skippers(skippers)
 
         if args['<format>'] == 'json':
             print(json.dumps(skippers))
