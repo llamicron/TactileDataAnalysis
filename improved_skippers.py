@@ -44,13 +44,12 @@ def identify_skippers(skip_amount, time_interval):
                 record['skipper'] = 1
             else:
                 record['skipper'] = 0
-            marked.append(record)
+        marked.append(record)
     return marked
 
 def write_skippers(data):
     with open('data/Skippers.json', 'w') as f:
         f.write(json.dumps(data))
-
 
 if '-w' in sys.argv:
     data = identify_skippers(5, 10)

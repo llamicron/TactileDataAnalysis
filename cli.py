@@ -43,19 +43,16 @@ def entry(args):
 
         if args['<format>'] == 'write':
             write_skippers(skippers)
-
-        if args['<format>'] == 'json':
+        elif args['<format>'] == 'json':
             print(json.dumps(skippers))
         elif args['<format>'] == 'html':
             # identify_skippers(time, skip, write_to_file='static/skippers_for_web.json')
             from app import app
             color('green', "Web server running: visit http://localhost:5000/")
             app.run()
-
         else:
             for skipper in skippers:
                 print(skipper['guid'])
-        print(len(skippers), "skippers")
         return skippers
 
 if __name__ == '__main__':
