@@ -53,6 +53,9 @@ def entry(args):
         else:
             for skipper in skippers:
                 print(skipper['guid'])
+            print(len(skippers))
+            for skipper in skippers:
+                assert skipper['skipper'] == 0 or skipper['skipper'] == 1
         return skippers
 
 if __name__ == '__main__':

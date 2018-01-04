@@ -8,17 +8,22 @@ def identify_skippers(skip_amount, time_interval):
 
     for record in data:
         actions = record['actions']
+        record['skipper'] = 0
+        # Test
         assert isinstance(actions, list)
         # Cast times to float
         for i in range(len(actions)):
             actions[i]['time'] = float(actions[i]['time'])
+            # Test
+            assert isinstance(actions[i]['time'], float)
         # Sort actions by time
         actions.sort(key=lambda x: x['time'])
-        assert isinstance(actions[0]['time'], float)
+        # Test
         for i in range(1, len(actions)):
             time = actions[i]['time']
             prev = actions[i - 1]['time']
             assert time > prev
+        # End Test
 
         forwards = []
         for i in range(len(actions)):
@@ -32,6 +37,7 @@ def identify_skippers(skip_amount, time_interval):
             else:
                 temp = [item]
                 chunks.append(temp)
+        # This is no longer needed
         del forwards
         for forwards in chunks:
             if len(forwards) < skip_amount:
@@ -40,10 +46,11 @@ def identify_skippers(skip_amount, time_interval):
             # for forward in forwards:
             time_diff = actions[forwards[-1]]['time'] - \
                 actions[forwards[0]]['time']
-            if time_diff < time_interval:
-                record['skipper'] = 1
-            else:
-                record['skipper'] = 0
+            # time_diff and time_interval
+            record['skipper'] = int(time_diff < time_interval)
+            if record['skipper']:
+                break
+            # print(record['skipper'])
         marked.append(record)
     return marked
 
