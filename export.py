@@ -1,3 +1,7 @@
+"""
+This script writes csv data to NavData.csv from Skippers.json
+run `python skippers.py <num> <num> write` to update Skippers.json
+"""
 import json
 import csv
 
