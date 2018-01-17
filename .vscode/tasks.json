@@ -1,0 +1,13 @@
+{
+  "tasks": [
+    {
+      "taskName": "run",
+      "command": "python",
+      "args": [
+        "skippers.py"
+      ],
+      "isBuildCommand": true,
+      "problemMatcher": []
+    }
+  ]
+}
