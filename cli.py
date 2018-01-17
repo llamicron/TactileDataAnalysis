@@ -17,12 +17,12 @@ Options:
 
 """
 
-VERSION = 'v0.0.1'
+VERSION = 'v1.0.2'
 
 import json
 
 from docopt import docopt
-from skippers import identify_skippers, write_skippers
+from skippers import mark_skippers
 from coolered import color
 
 import sys
@@ -39,24 +39,19 @@ def entry(args):
         time = int(args['<time_interval>'])
         skip = int(args['<skip_amount>'])
 
-        skippers = identify_skippers(time, skip)
+        data = mark_skippers(time, skip)
+        skippers = []
+        for record in data:
+            if record['skipper']:
+                skippers.append(record)
 
+        print(len(data), "records")
+        print(len(skippers), "skippers")
         if args['<format>'] == 'write':
-            write_skippers(skippers)
-        elif args['<format>'] == 'json':
-            print(json.dumps(skippers))
-        elif args['<format>'] == 'html':
-            # identify_skippers(time, skip, write_to_file='static/skippers_for_web.json')
-            from app import app
-            color('green', "Web server running: visit http://localhost:5000/")
-            app.run()
-        else:
-            for skipper in skippers:
-                print(skipper['guid'])
-            print(len(skippers))
-            for skipper in skippers:
-                assert skipper['skipper'] == 0 or skipper['skipper'] == 1
-        return skippers
+            with open('data/Skippers.json', 'w') as fi:
+                print("Writing to Skippers.json")
+                fi.write(json.dumps(data))
+        return data
 
 if __name__ == '__main__':
     entry(docopt(__doc__))

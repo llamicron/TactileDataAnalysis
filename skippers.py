@@ -58,13 +58,16 @@ def is_forward(action):
 def find_consecutive_forward_groups(actions, min_size = 0):
     forwards = []
     chunk = []
-    for action in actions:
+    for i in range(len(actions)):
+        action = actions[i]
         if is_forward(action):
             chunk.append(action)
-        else:
+
+        # If this is the last iteration or it's not a forward (ending the streak)
+        if not is_forward(action) or i + 1 == len(actions):
             if len(chunk) >= min_size:
                 forwards.append(chunk)
-            chunk = []
+                chunk = []
     return forwards
 
 def mark_skippers(skip_amount, time_interval):
@@ -86,7 +89,6 @@ def mark_skippers(skip_amount, time_interval):
         actions.sort(key=lambda x: x['time'])
 
         forwards = find_consecutive_forward_groups(actions, min_size = int(skip_amount))
-
         for chunk in forwards:
             # a 'chunk' is a group of consecutive forwards
             # If there is a string of skip_amount size, where the time diff is less than time_interval, it's a skipper
@@ -95,7 +97,7 @@ def mark_skippers(skip_amount, time_interval):
                 time_diff = chunk[i + skip_amount]['time'] - chunk[i]['time']
                 if time_diff <= time_interval:
                     record['skipper'] = 1
-            marked.append(record)
+        marked.append(record)
     return marked
 
 if __name__ == '__main__':
@@ -112,7 +114,7 @@ if __name__ == '__main__':
     if 'write' in sys.argv:
         with open('data/Skippers.json', 'w') as f:
             print("Writing to Skippers.json")
-            json.dumps(mark_skippers(6, 4))
+            f.write(json.dumps(mark_skippers(6, 5)))
 
     if 'test' in sys.argv:
         found = False
@@ -125,9 +127,10 @@ if __name__ == '__main__':
                     if bool(record['skipper']):
                         guids.append(record['guid'])
                 if sorted(guids) == sorted(target_set):
+                    print(guids)
+                    print(len(guids))
                     found = True
                     print("Target set found at x =", x, ", y =", y)
-                    continue
         if not found:
             print("No data sets match target set")
 
