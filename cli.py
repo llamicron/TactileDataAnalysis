@@ -22,7 +22,7 @@ VERSION = 'v0.0.1'
 import json
 
 from docopt import docopt
-from improved_skippers import identify_skippers, write_skippers
+from skippers import identify_skippers, write_skippers
 from coolered import color
 
 import sys

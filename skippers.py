@@ -1,42 +1,69 @@
 import json
 import sys
 
-# Chnage this with the CLI
-time_interval = 10
-skip_amount = 10
-
-
-def identify_skippers(time_interval, skip_amount, write_to_file=False):
-    skipper_count = 0
+def identify_skippers(skip_amount, time_interval):
+    marked = []
     data = json.load(open('data/CountedNavData.json', 'r'))
-    skippers = []
+    assert data
+
     for record in data:
-        skipper = False
-        # Order by time
-        record['actions'] = sorted(record['actions'], key=lambda k: k['time'])
-        # Find string of F or FP
-        forwards = [x for x in record['actions']
-                    if x['action'] == "FP" or x['action'] == "F"]
-        if not forwards:
-            skipper = False
-            # continue
+        actions = record['actions']
+        record['skipper'] = 0
+        # Test
+        assert isinstance(actions, list)
+        # Cast times to float
+        for i in range(len(actions)):
+            actions[i]['time'] = float(actions[i]['time'])
+            # Test
+            assert isinstance(actions[i]['time'], float)
+        # Sort actions by time
+        actions.sort(key=lambda x: x['time'])
+        # Test
+        for i in range(1, len(actions)):
+            time = actions[i]['time']
+            prev = actions[i - 1]['time']
+            assert time > prev
+        # End Test
 
-        # If found, check if first and last are within time frame
-        for i in range(len(forwards) - skip_amount):
-            if float(forwards[i + skip_amount]['time']) - float(forwards[i]['time']) <= time_interval:
-                skipper = True
+        forwards = []
+        for i in range(len(actions)):
+            if actions[i]['action'] == 'F' or actions[i]['action'] == 'FP':
+                forwards.append(i)
+        temp = []
+        chunks = []
+        for item in forwards:
+            if len(temp) > 0 and item == temp[-1] + 1:
+                temp.append(item)
+            else:
+                temp = [item]
+                chunks.append(temp)
+        # This is no longer needed
+        del forwards
+        for forwards in chunks:
+            if len(forwards) < skip_amount:
+                continue
+            # print(forwards)
+            # for forward in forwards:
+            time_diff = actions[forwards[-1]]['time'] - \
+                actions[forwards[0]]['time']
+            # time_diff and time_interval
+            record['skipper'] = int(time_diff < time_interval)
+            if record['skipper']:
+                break
+            # print(record['skipper'])
+        marked.append(record)
+    return marked
 
-        record['skipper'] = skipper
-        skippers.append(record)
-    if write_to_file:
-        with open('data/Skippers.json', 'w') as f:
-            print("Writing file")
-            f.write(json.dumps(skippers))
-    return skippers
+def write_skippers(data):
+    with open('data/Skippers.json', 'w') as f:
+        f.write(json.dumps(data))
 
 if '-w' in sys.argv:
-    identify_skippers(time_interval, skip_amount, write_to_file=True)
+    data = identify_skippers(5, 10)
+    write_skippers(data)
 
-
-if '-p' in sys.argv:
-    print(identify_skippers(time_interval, skip_amount))
+if __name__ == '__main__':
+    data = identify_skippers(5, 10)
+    print("5 and 10")
+    for record in data:
+        print(record['guid'][-6:])
