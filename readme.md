@@ -1,6 +1,6 @@
 ## Write to skippers
 ```bash
-$ python cli.py [SKIP_AMOUNT] [TIME_INTERVAL] write
+$ python cli.py skippers [SKIP_AMOUNT] [TIME_INTERVAL] write
 ```
 This write to `data/Skippers.json`
 

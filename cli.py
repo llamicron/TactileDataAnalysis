@@ -25,8 +25,6 @@ from docopt import docopt
 from skippers import mark_skippers
 from coolered import color
 
-import sys
-import os
 
 def entry(args):
     if args['--version']:
