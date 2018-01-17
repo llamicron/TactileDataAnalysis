@@ -103,7 +103,8 @@ def mark_skippers(skip_amount, time_interval):
 if __name__ == '__main__':
 
     if 'guids' in sys.argv:
-        data = mark_skippers(6, 4)
+        # This is where values are updated for this command
+        data = mark_skippers(6, 5)
         skipper_guids = []
         for record in data:
             if record['skipper']:
