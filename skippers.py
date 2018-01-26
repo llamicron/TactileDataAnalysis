@@ -1,6 +1,9 @@
 """
 Usage:
     skippers.py <input_file> <output_file> <skip_amount> <time_interval>
+
+Notes:
+    This outputs ALL the data, with skippers marked as {"skipper": 1}. Non skippers are included in the data set.
 """
 
 """
@@ -17,6 +20,8 @@ import json
 from contextlib import suppress
 import sys
 import os
+
+from docopt import docopt
 from custom_exceptions import FileNotFound
 
 target_set = [
@@ -83,6 +88,9 @@ def mark_skippers(input_file, skip_amount, time_interval):
     data = json.load(open(input_file, 'r'))
     assert data
 
+    skip_amount = int(skip_amount)
+    time_interval = float(time_interval)
+
     marked = []
 
     for record in data:
@@ -126,37 +134,4 @@ if __name__ == '__main__':
     data = mark_skippers(args['<input_file>'], args['<skip_amount>'], args['<time_interval>'])
     with open(args['<output_file>'], 'w') as f:
         f.write(json.dumps(data))
-    # if 'guids' in sys.argv:
-    #     # This is where values are updated for this command
-    #     data = mark_skippers(6, 5)
-    #     skipper_guids = []
-    #     for record in data:
-    #         if record['skipper']:
-    #             skipper_guids.append(record['guid'])
-    #     print(skipper_guids)
-    #     print(len(skipper_guids))
-
-    # if 'write' in sys.argv:
-    #     with open('data/Skippers.json', 'w') as f:
-    #         print("Writing to Skippers.json")
-    #         f.write(json.dumps(mark_skippers(6, 5)))
-
-    # if 'test' in sys.argv:
-    #     found = False
-    #     # 6, 4
-    #     for x in range(1, 11):
-    #         for y in range(1, 11):
-    #             data = mark_skippers(x, y)
-    #             guids = []
-    #             for record in data:
-    #                 if bool(record['skipper']):
-    #                     guids.append(record['guid'])
-    #             if sorted(guids) == sorted(target_set):
-    #                 print(guids)
-    #                 print(len(guids))
-    #                 found = True
-    #                 print("Target set found at x =", x, ", y =", y)
-    #     if not found:
-    #         print("No data sets match target set")
-
 
