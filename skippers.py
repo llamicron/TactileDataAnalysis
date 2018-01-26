@@ -1,4 +1,9 @@
 """
+Usage:
+    skippers.py <input_file> <output_file> <skip_amount> <time_interval>
+"""
+
+"""
 if there are 6 or more consecutive forward navigations within a 4 second period
 
 forwards == 'FP' or 'F'
@@ -11,6 +16,8 @@ if time diff < 4 seconds, it's a skipper
 import json
 from contextlib import suppress
 import sys
+import os
+from custom_exceptions import FileNotFound
 
 target_set = [
     '1C5875D6-4C66-46E1-BF13-734821BE9A35',
@@ -70,8 +77,10 @@ def find_consecutive_forward_groups(actions, min_size = 0):
                 chunk = []
     return forwards
 
-def mark_skippers(skip_amount, time_interval):
-    data = json.load(open('data/CountedNavData.json', 'r'))
+def mark_skippers(input_file, skip_amount, time_interval):
+    if not os.path.isfile(input_file):
+        raise FileNotFound("Couldn't find file: " + input_file)
+    data = json.load(open(input_file, 'r'))
     assert data
 
     marked = []
@@ -101,38 +110,53 @@ def mark_skippers(skip_amount, time_interval):
     return marked
 
 if __name__ == '__main__':
+    args = docopt(__doc__)
+    if os.path.isfile(args['<output_file>']):
+        while True:
+            choice = input(args['<output_file>'] +
+                           ' is already a file. Overwrite? ')
+            if choice.upper() == 'Y':
+                break
+            elif choice.upper() == 'N':
+                print('Quiting')
+                sys.exit(0)
+            else:
+                print('Invalid choice, type y or n')
+    print('Writing')
+    data = mark_skippers(args['<input_file>'], args['<skip_amount>'], args['<time_interval>'])
+    with open(args['<output_file>'], 'w') as f:
+        f.write(json.dumps(data))
+    # if 'guids' in sys.argv:
+    #     # This is where values are updated for this command
+    #     data = mark_skippers(6, 5)
+    #     skipper_guids = []
+    #     for record in data:
+    #         if record['skipper']:
+    #             skipper_guids.append(record['guid'])
+    #     print(skipper_guids)
+    #     print(len(skipper_guids))
 
-    if 'guids' in sys.argv:
-        # This is where values are updated for this command
-        data = mark_skippers(6, 5)
-        skipper_guids = []
-        for record in data:
-            if record['skipper']:
-                skipper_guids.append(record['guid'])
-        print(skipper_guids)
-        print(len(skipper_guids))
+    # if 'write' in sys.argv:
+    #     with open('data/Skippers.json', 'w') as f:
+    #         print("Writing to Skippers.json")
+    #         f.write(json.dumps(mark_skippers(6, 5)))
 
-    if 'write' in sys.argv:
-        with open('data/Skippers.json', 'w') as f:
-            print("Writing to Skippers.json")
-            f.write(json.dumps(mark_skippers(6, 5)))
-
-    if 'test' in sys.argv:
-        found = False
-        # 6, 4
-        for x in range(1, 11):
-            for y in range(1, 11):
-                data = mark_skippers(x, y)
-                guids = []
-                for record in data:
-                    if bool(record['skipper']):
-                        guids.append(record['guid'])
-                if sorted(guids) == sorted(target_set):
-                    print(guids)
-                    print(len(guids))
-                    found = True
-                    print("Target set found at x =", x, ", y =", y)
-        if not found:
-            print("No data sets match target set")
+    # if 'test' in sys.argv:
+    #     found = False
+    #     # 6, 4
+    #     for x in range(1, 11):
+    #         for y in range(1, 11):
+    #             data = mark_skippers(x, y)
+    #             guids = []
+    #             for record in data:
+    #                 if bool(record['skipper']):
+    #                     guids.append(record['guid'])
+    #             if sorted(guids) == sorted(target_set):
+    #                 print(guids)
+    #                 print(len(guids))
+    #                 found = True
+    #                 print("Target set found at x =", x, ", y =", y)
+    #     if not found:
+    #         print("No data sets match target set")
 
 

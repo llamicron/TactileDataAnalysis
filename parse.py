@@ -1,6 +1,6 @@
 """
 Usage:
-    parse <input_file> <output_file>
+    parse.py <input_file> <output_file>
 """
 import re
 import sys
@@ -8,9 +8,7 @@ import json
 import os
 
 from docopt import docopt
-
-class FileNotFound(Exception):
-    pass
+from custom_exceptions import FileNotFound
 
 def chunk(list, interval):
     chunked_list = []
@@ -27,7 +25,7 @@ def to_json(input_file):
     Parses file (.dat) to json
     """
     if not os.path.isfile(input_file):
-        raise FileNotFound("Couldn't find that file")
+        raise FileNotFound("Couldn't find file: " + input_file)
     lines = open(input_file, 'r').read().split('\n')
     data = []
     for line in lines:
