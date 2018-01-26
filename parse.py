@@ -1,6 +1,10 @@
 """
 Usage:
     parse.py <input_file> <output_file>
+
+Recommended:
+    input_file: NavData.dat
+    output_file: NavData.json
 """
 import re
 import sys

@@ -2,6 +2,10 @@
 Usage:
     skippers.py <input_file> <output_file> <skip_amount> <time_interval>
 
+Recommended:
+    input_file: CountedNavData.json
+    output_file: Skippers.json
+
 Notes:
     This outputs ALL the data, with skippers marked as {"skipper": 1}. Non skippers are included in the data set.
 """

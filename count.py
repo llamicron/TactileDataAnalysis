@@ -1,6 +1,10 @@
 """
 Usage:
     count.py <input_file> <output_file>
+
+Recommended:
+    input_file: data/NavData.json
+    output_file: data/CountedNavData.json
 """
 
 import json
@@ -9,8 +13,6 @@ import os
 from custom_exceptions import FileNotFound
 
 from docopt import docopt
-
-# From 'data/NavData.json' to 'data/CountedNavData.json', normally
 
 def to_json(input_file):
     if not os.path.isfile(input_file):
