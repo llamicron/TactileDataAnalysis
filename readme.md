@@ -12,7 +12,7 @@ This will show you the help page. Each module takes an input file and an output 
 
 See the help page on each module to see the recommended files to read from and write to, but you can use any file.
 
-**It's important that you run the 4 steps in the right order.**
+**It's important that you run the 5 steps in the right order.**
 
 1. `prepare.py`
 2. `parse.py`
