@@ -39,11 +39,6 @@ def to_json(input_file):
         record['count'] = count
     return data
 
-if '-w' in sys.argv:
-    print("Writing to file: data/CountedNavData.json")
-    with open('data/CountedNavData.json', 'w') as f:
-        f.write(json.dumps(data))
-
 if __name__ == '__main__':
     args = docopt(__doc__)
     if os.path.isfile(args['<output_file>']):

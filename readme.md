@@ -1,7 +1,8 @@
 # TactileTTS Data Analysis
 ## Proccess
-Each module in the proccess (`parse.py`, `count.py`, `skippers.py`, `export.py`, in that order) has a CLI. Run it like this:
+Each module in the proccess (`prepare`, `parse`, `count`, `skippers`, `export`, in that order) has a CLI. Run it like this:
 ```
+$ python prepare.py --help
 $ python parse.py --help
 $ python count.py --help
 ...
@@ -13,14 +14,18 @@ See the help page on each module to see the recommended files to read from and w
 
 **It's important that you run the 4 steps in the right order.**
 
-1. `parse.py`
-2. `count.py`
-3. `skippers.py`
-4. `export.py`
+1. `prepare.py`
+2. `parse.py`
+3. `count.py`
+4. `skippers.py`
+5. `export.py`
 
 Don't use `cli.py` anymore
 
 #
+### `prepare.py`
+This takes an input file and replaces the string `&quot;` with a single quote (`'`). It writes to the same input file.
+
 ### `parse.py`
 Reads from a tab delimited file (eg. `NavData.dat`) and converts it to json. Writes to a json file (eg. `NavData.json`)
 

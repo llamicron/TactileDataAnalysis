@@ -5,6 +5,8 @@ Usage:
     cli.py (-h | --help)
 
 Options:
+    DEPRECATED: Don't use this module!!
+
     -h --help          Show this screen
     -v --version       Show version.
     <time_interval>    Max time from the first skip to the last
