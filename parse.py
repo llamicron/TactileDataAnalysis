@@ -24,13 +24,10 @@ def chunk(list, interval):
             raise ValueError("Not enough values to complete a chunk!")
     return chunked_list
 
-def to_json(input_file):
+def to_json(lines):
     """
     Parses file (.dat) to json
     """
-    if not os.path.isfile(input_file):
-        raise FileNotFound("Couldn't find file: " + input_file)
-    lines = open(input_file, 'r').read().split('\n')
     data = []
     for line in lines:
         match = re.match(r'(.+)(.+\[.+\])', line)
@@ -66,6 +63,7 @@ if __name__ == '__main__':
             else:
                 print('Invalid choice, type y or n')
     print('Writing')
-    data = to_json(args['<input_file>'])
+    lines = open(args['<input_file>'], 'r').read().split('\n')
+    data = to_json(lines)
     with open(args['<output_file>'], 'w') as f:
         f.write(json.dumps(data))

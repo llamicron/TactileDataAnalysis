@@ -14,10 +14,7 @@ import sys
 from docopt import docopt
 from custom_exceptions import FileNotFound
 
-def export(input_file):
-    if not os.path.isfile(input_file):
-        raise FileNotFound("Couldn't find file: " + input_file)
-    data = json.load(open(input_file, 'r'))
+def export(data):
     rows = []
     for record in data:
         new_format = {
@@ -31,6 +28,12 @@ def export(input_file):
         rows.append(new_format)
     return rows
 
+def write_csv(file, rows):
+    with open(file, 'w') as f:
+        w = csv.writer(f)
+        w.writerow(rows[0].keys())
+        for row in rows:
+            w.writerow(row.values())
 
 if __name__ == '__main__':
     args = docopt(__doc__)
@@ -46,9 +49,6 @@ if __name__ == '__main__':
             else:
                 print('Invalid choice, type y or n')
     print('Writing')
-    rows = export(args['<input_file>'])
-    with open(args['<output_file>'], 'w') as f:
-        w = csv.writer(f)
-        w.writerow(rows[0].keys())
-        for row in rows:
-            w.writerow(row.values())
+    rows = export(json.load(open(args['<input_file>'], 'r')))
+    write_csv(args['<output_file>'], rows)
+

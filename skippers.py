@@ -86,12 +86,7 @@ def find_consecutive_forward_groups(actions, min_size = 0):
                 chunk = []
     return forwards
 
-def mark_skippers(input_file, skip_amount, time_interval):
-    if not os.path.isfile(input_file):
-        raise FileNotFound("Couldn't find file: " + input_file)
-    data = json.load(open(input_file, 'r'))
-    assert data
-
+def mark_skippers(data, skip_amount, time_interval):
     skip_amount = int(skip_amount)
     time_interval = float(time_interval)
 
@@ -135,7 +130,8 @@ if __name__ == '__main__':
             else:
                 print('Invalid choice, type y or n')
     print('Writing')
-    data = mark_skippers(args['<input_file>'], args['<skip_amount>'], args['<time_interval>'])
+    json_data = json.load(open(args['<input_file>'], 'r'))
+    data = mark_skippers(json_data, args['<skip_amount>'], args['<time_interval>'])
     with open(args['<output_file>'], 'w') as f:
         f.write(json.dumps(data))
 

@@ -13,9 +13,7 @@ import sys
 from docopt import docopt
 from custom_exceptions import FileNotFound
 
-def prepare(args):
-    input_file = args['<input_file>']
-
+def prepare(input_file):
     if not os.path.isfile(input_file):
         raise FileNotFound("Couldn't find file: " + input_file)
 
@@ -30,4 +28,4 @@ def prepare(args):
 
 if __name__ == '__main__':
     args = docopt(__doc__)
-    data = prepare(args)
+    data = prepare(args['<input_file>'])

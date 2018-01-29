@@ -1,4 +1,13 @@
 # TactileTTS Data Analysis
+
+# Run all the steps at once
+```
+$ python all.py <input_file> <skip_amount> <time_interval>
+```
+Where `<input_file>` is a tab delimited file (probably from excel). A skipper is marked if they navigate forward `<skip_amount>` times in `<time_interval>` seconds.
+Writes CSV data to the same filename you provided, but with a `.csv` extension.
+
+# Running them Manually
 ## Proccess
 Each module in the proccess (`prepare`, `parse`, `count`, `skippers`, `export`, in that order) has a CLI. Run it like this:
 ```
