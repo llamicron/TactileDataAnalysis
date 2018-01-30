@@ -17,16 +17,15 @@ Example:
 # 5. export
 
 import os
+import sys
 
 from docopt import docopt
 
-
-import prepare
-import parse
 import count
+import export  # lol
+import parse
+import prepare
 import skippers
-import export # lol
-
 from custom_exceptions import FileNotFound
 
 if __name__ == '__main__':
@@ -42,5 +41,3 @@ if __name__ == '__main__':
     assert not os.path.isfile(exported_filename)
     export.write_csv(exported_filename, to_export)
     print('Done')
-
-
