@@ -54,4 +54,4 @@ Reads from output file of `skippers.py` (eg. `Skippers.json`) and converts outpu
 #
 All file names can be changed
 
-**Reminder:** be sure to add `data/` to the beginning of the files you read and write from. Kepp data files in the `data/` directory.
+**Reminder:** be sure to add `data/[DATE]` to the beginning of the files you read and write from. Keep data files in the `data/` directory, and I recommend putting them in a subdirectory named with the date to keep batches seperate.
