@@ -1,6 +1,9 @@
 """
 Usage:
-    all.py <input_file> <skip_amount> <time_interval>
+    all.py <input_file> <skip_amount> <time_interval> [--skipper-guids]
+
+Options:
+    --skipper-guids     Prints the GUIDs of the skippers. Does not finish export.
 
 Details:
     This runs all the steps, in order.
@@ -36,6 +39,11 @@ if __name__ == '__main__':
     parsed = parse.to_json(open(fi, 'r').read().split('\n'))
     counted = count.to_json(parsed)
     marked = skippers.mark_skippers(counted, args['<skip_amount>'], args['<time_interval>'])
+    if args['--skipper-guids']:
+        for record in marked:
+            if record['skipper']:
+                print(record['guid'])
+        sys.exit(0)
     to_export = export.export(marked)
     exported_filename = fi.split('.')[0] + '.csv'
     assert not os.path.isfile(exported_filename)
