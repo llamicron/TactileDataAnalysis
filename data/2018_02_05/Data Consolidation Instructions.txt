@@ -14,6 +14,16 @@ Instructions for Consolidating TactileTTS Study Data
 12. Open Phase2 dataset in SPSS and sort by GUID, and delete duplicates
 13. Data -> Merge Files -> Add Variables -> From An Open Dataset -> <Phase2file> -> One-to-One merge based on key values (participantGuid should be listed in the Key Variables box)
 14. Save result into a new file (e.g., TactileTTSMerged.sav)
+15. Download Phase 2 data file as a tab-delimited file (using the new exporter, not legacy)
+16. Open TSV in Excel, delete all fields except GUID and resultstring
+17. Change order of fields to be GUI and then resultstring
+18. Sort by GUID, and delete duplicates, save as TSV (this is the input file for Luke's script)
+19. Run skippers script and output all desired datasets.
+20. Import CSV navdata file into a new SPSS data file.
+21. Merge new SPSS nav data file using the procedure above.
+
+
+
 15. Merge NavData.sav in the same way (this file is processed via Luke's script)
 16. Run recode.sps ONCE. This syntax file does the following:
 	a. Reverse-codes MSLQ33SR_2 MSLQ57SR_2 MSLQ37ER_2 MSLQ60ER_2
