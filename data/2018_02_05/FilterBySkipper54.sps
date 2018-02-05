@@ -1,0 +1,7 @@
+﻿* Encoding: UTF-8.
+FILTER OFF. 
+USE ALL. 
+EXECUTE. 
+USE ALL. 
+FILTER BY Skipper54. 
+EXECUTE.

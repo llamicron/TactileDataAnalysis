@@ -1,0 +1,11 @@
+﻿* Encoding: UTF-8.
+COMPUTE ISquared=I * I. 
+EXECUTE. 
+COMPUTE TASquared=TA * TA. 
+EXECUTE. 
+COMPUTE RESquared=RE * RE. 
+EXECUTE. 
+COMPUTE SRSquared=SR * SR. 
+EXECUTE. 
+COMPUTE ERSquared=ER * ER. 
+EXECUTE.

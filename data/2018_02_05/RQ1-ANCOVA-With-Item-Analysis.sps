@@ -1,0 +1,33 @@
+﻿* Encoding: UTF-8.
+
+USE ALL. 
+COMPUTE filter_$=(Skipper ~=1). 
+VARIABLE LABELS filter_$ 'Skipper ~=1 (FILTER)'. 
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'. 
+FORMATS filter_$ (f1.0). 
+FILTER BY filter_$. 
+EXECUTE.
+
+UNIANOVA PostTestIA BY Experimental 
+  /METHOD=SSTYPE(3) 
+  /INTERCEPT=INCLUDE 
+  /EMMEANS=TABLES(Experimental) 
+  /PRINT=ETASQ DESCRIPTIVE HOMOGENEITY OPOWER 
+  /CRITERIA=ALPHA(.05) 
+  /DESIGN=Experimental.
+
+UNIANOVA PostTestIA BY Experimental WITH PreTestIA 
+  /METHOD=SSTYPE(3) 
+  /INTERCEPT=INCLUDE 
+  /EMMEANS=TABLES(Experimental) WITH(PreTestIA=MEAN) 
+  /PRINT=ETASQ DESCRIPTIVE HOMOGENEITY OPOWER 
+  /CRITERIA=ALPHA(.05) 
+  /DESIGN=Experimental PreTestIA Experimental*PreTestIA.
+
+UNIANOVA PostTestIA BY Experimental WITH PreTestIA 
+  /METHOD=SSTYPE(3) 
+  /INTERCEPT=INCLUDE 
+  /EMMEANS=TABLES(Experimental) WITH(PreTestIA=MEAN) 
+  /PRINT=ETASQ DESCRIPTIVE HOMOGENEITY OPOWER 
+  /CRITERIA=ALPHA(.05) 
+  /DESIGN=PreTestIA Experimental.
