@@ -1,19 +1,26 @@
 # TactileTTS Data Analysis
 
 # Run all the steps at once
+
+```shell
+python all.py <input_file> <skip_amount> <time_interval> [--skipper-guids]
 ```
-$ python all.py <input_file> <skip_amount> <time_interval>
-```
+
 Where `<input_file>` is a tab delimited file (probably from excel). A skipper is marked if they navigate forward `<skip_amount>` times in `<time_interval>` seconds.
 Writes CSV data to the same filename you provided, but with a `.csv` extension.
 
+Add the `--skipper-guids` flag to print the guids of just the skippers to the terminal. After printing, execution is halted, it will **not** export a `csv` file.
+
 # Running them Manually
+
 ## Proccess
+
 Each module in the proccess (`prepare`, `parse`, `count`, `skippers`, `export`, in that order) has a CLI. Run it like this:
-```
-$ python prepare.py --help
-$ python parse.py --help
-$ python count.py --help
+
+```shell
+python prepare.py --help
+python parse.py --help
+python count.py --help
 ...
 ```
 
