@@ -20,12 +20,8 @@ Instructions for Consolidating TactileTTS Study Data
 18. Sort by GUID, and delete duplicates, save as TSV (this is the input file for Luke's script)
 19. Run skippers script and output all desired datasets.
 20. Import CSV navdata file into a new SPSS data file.
-21. Merge new SPSS nav data file using the procedure above.
-
-
-
-15. Merge NavData.sav in the same way (this file is processed via Luke's script)
-16. Run recode.sps ONCE. This syntax file does the following:
+21. Merge NavData.sav in the same way (this file is processed via Luke's script)
+22. Run recode.sps ONCE. This syntax file does the following:
 	a. Reverse-codes MSLQ33SR_2 MSLQ57SR_2 MSLQ37ER_2 MSLQ60ER_2
 	b. Computes variables(I,TA,RE,SR,ER,PreTest,PostTest)
 	c. Computes Skippers by flagging those ParticipantGuids that are in the list

@@ -21,7 +21,3 @@ COMPUTE PostTest=PostQ1 + PostQ2 + PostQ3 + PostQ4 + PostQ5 + PostQ6 + PostQ7 + 
 EXECUTE.
 COMPUTE Experimental=1.
 EXECUTE.
-IF  (P2participantGroup = 0) Experimental=0.
-EXECUTE.
-COMPUTE Skipper=0.
-EXECUTE.
