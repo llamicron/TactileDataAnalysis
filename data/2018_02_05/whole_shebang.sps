@@ -84,14 +84,15 @@ UNIANOVA PostTestIA BY Experimental WITH PreTestIA
   /CRITERIA=ALPHA(.05) 
   /DESIGN=PreTestIA Experimental.
 
-*RQ1.5 Does navigation use affect comprehension.
+*Does navigation use affect comprehension.
 USE ALL. 
 COMPUTE filter_$=(Skipper = 0  & Experimental = 1). 
 VARIABLE LABELS filter_$ 'Skipper = 0  & Experimental = 1 (FILTER)'. 
 VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'. 
 FORMATS filter_$ (f1.0). 
 FILTER BY filter_$. 
-EXECUTE.  
+EXECUTE.
+  
 * Curve Estimation. 
 TSET NEWVAR=NONE. 
 CURVEFIT 
@@ -108,7 +109,7 @@ REGRESSION
   /METHOD=ENTER NavTotal 
   /METHOD=ENTER NavTotalSquared.
 
-*MANOVA RQ2 SR and RE vs Navtotal and NavTotalSquared.
+*MANOVA SR and RE vs Navtotal and NavTotalSquared.
 USE ALL. 
 COMPUTE filter_$=(Skipper = 0  & Experimental = 1). 
 VARIABLE LABELS filter_$ 'Skipper = 0  & Experimental = 1 (FILTER)'. 
@@ -116,16 +117,14 @@ VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
 FORMATS filter_$ (f1.0). 
 FILTER BY filter_$. 
 EXECUTE.
-GLM TrainTotal NavTotalSquared WITH SR RE 
+GLM NavTotal NavTotalSquared WITH SR RE 
   /METHOD=SSTYPE(3) 
   /INTERCEPT=INCLUDE 
-  /PRINT=DESCRIPTIVE ETASQ OPOWER PARAMETER 
+  /PRINT=DESCRIPTIVE ETASQ OPOWER 
   /CRITERIA=ALPHA(.05) 
   /DESIGN=SR RE RE*SR.
 
-
-
-*MANOVA RQ3 TA, I, and ER vs Navtotal and NavTotalSquared.
+*MANOVA TA, I, and ER vs Navtotal and NavTotalSquared.
 USE ALL. 
 COMPUTE filter_$=(Skipper = 0  & Experimental = 1). 
 VARIABLE LABELS filter_$ 'Skipper = 0  & Experimental = 1 (FILTER)'. 
@@ -133,10 +132,41 @@ VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
 FORMATS filter_$ (f1.0). 
 FILTER BY filter_$. 
 EXECUTE.
-GLM TrainTotal NavTotalSquared WITH I TA ER 
+GLM NavTotal NavTotalSquared WITH I TA ER 
   /METHOD=SSTYPE(3) 
   /INTERCEPT=INCLUDE 
-  /PRINT=DESCRIPTIVE ETASQ OPOWER PARAMETER 
+  /PRINT=DESCRIPTIVE ETASQ OPOWER 
   /CRITERIA=ALPHA(.05) 
-  /DESIGN=I TA ER I*TA ER*TA ER*I ER*I*TA
+  /DESIGN=I TA ER I*TA ER*TA ER*I ER*I*TA.
+
+*MANOVA SR and RE vs Traintotal and TrainTotalSquared.
+USE ALL. 
+COMPUTE filter_$=(Skipper = 0  & Experimental = 1). 
+VARIABLE LABELS filter_$ 'Skipper = 0  & Experimental = 1 (FILTER)'. 
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'. 
+FORMATS filter_$ (f1.0). 
+FILTER BY filter_$. 
+EXECUTE.
+GLM TrainTotal TrainTotalSquared WITH SR RE 
+  /METHOD=SSTYPE(3) 
+  /INTERCEPT=INCLUDE 
+  /PRINT=DESCRIPTIVE ETASQ OPOWER 
+  /CRITERIA=ALPHA(.05) 
+  /DESIGN=SR RE RE*SR.
+
+*MANOVA TA, I, and ER vs Traintotal and TrainTotalSquared.
+USE ALL. 
+COMPUTE filter_$=(Skipper = 0  & Experimental = 1). 
+VARIABLE LABELS filter_$ 'Skipper = 0  & Experimental = 1 (FILTER)'. 
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'. 
+FORMATS filter_$ (f1.0). 
+FILTER BY filter_$. 
+EXECUTE.
+GLM TrainTotal TrainTotalSquared WITH I TA ER 
+  /METHOD=SSTYPE(3) 
+  /INTERCEPT=INCLUDE 
+  /PRINT=DESCRIPTIVE ETASQ OPOWER 
+  /CRITERIA=ALPHA(.05) 
+  /DESIGN=I TA ER I*TA ER*TA ER*I ER*I*TA.
+
 

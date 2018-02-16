@@ -1,6 +1,8 @@
 ﻿* Encoding: UTF-8.
 COMPUTE NavTotalSquared=(NavTotal - 10.50) * (NavTotal - 10.50) . 
 EXECUTE.
+COMPUTE TrainTotalSquared=(TrainTotal - 6.34) * (TrainTotal - 6.34) . 
+EXECUTE.
 COMPUTE ISquared=(I  - 4.9967) * (I - 4.9967) . 
 EXECUTE. 
 COMPUTE TASquared=(TA  - 4.25) * (TA - 4.25) . 
