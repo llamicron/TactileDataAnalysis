@@ -54,7 +54,18 @@ RELIABILITY
   /STATISTICS=DESCRIPTIVE SCALE CORR 
   /SUMMARY=TOTAL.
 
-*RQ1 - compare experimental and control ANCOVA.
+*Descriptives post-skipper.
+USE ALL. 
+COMPUTE filter_$=(Skipper = 0). 
+VARIABLE LABELS filter_$ 'Skipper = 0 (FILTER)'. 
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'. 
+FORMATS filter_$ (f1.0). 
+FILTER BY filter_$. 
+EXECUTE. 
+DESCRIPTIVES VARIABLES=PreTest PreTestIA PostTest PostTestIA NavTotal TrainTotal SR RE I TA ER 
+  /STATISTICS=MEAN STDDEV MIN MAX KURTOSIS SKEWNESS.
+
+*RQ1A - compare experimental and control ANCOVA.
 USE ALL. 
 COMPUTE filter_$=(Skipper ~=1). 
 VARIABLE LABELS filter_$ 'Skipper ~=1 (FILTER)'. 
@@ -168,5 +179,19 @@ GLM TrainTotal TrainTotalSquared WITH I TA ER
   /PRINT=DESCRIPTIVE ETASQ OPOWER 
   /CRITERIA=ALPHA(.05) 
   /DESIGN=I TA ER I*TA ER*TA ER*I ER*I*TA.
+
+*Distraction frequencies.
+USE ALL. 
+COMPUTE filter_$=(Skipper = 0  & SYSMIS(PreTestIA) = 0  & SYSMIS(PostTestIA) = 0). 
+VARIABLE LABELS filter_$ 'Skipper = 0  & SYSMIS(PreTestIA) = 0  & SYSMIS(PostTestIA) = 0 (FILTER)'. 
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'. 
+FORMATS filter_$ (f1.0). 
+FILTER BY filter_$. 
+EXECUTE. 
+FREQUENCIES VARIABLES=P2Error P2ErrorDesc P2Distractions_8 P2Distractions_2 P2Distractions_1 
+    P2Distractions_3 P2Distractions_4 P2Distractions_7 P2FreezeOrCrash P2DistractionsOther 
+    P2OtherDevice P2Notetaking 
+  /ORDER=ANALYSIS.
+
 
 
